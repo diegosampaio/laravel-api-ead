@@ -33,13 +33,15 @@ services:
 
     # db mysql
     mysql:
+        container_name: 'mysql_curso'
         image: mysql:5.7.22
         restart: unless-stopped
         environment:
-            MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_ROOT_HOST: '%'  # needs to be enclosed with quotes
         volumes:
             - ./.docker/mysql/dbdata:/var/lib/mysql
         ports:
